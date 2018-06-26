@@ -6,6 +6,7 @@ from django.views.generic.detail import DetailView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Sum
 from .models import Almacen
 from .forms import AlmacenForm
 import pprint
@@ -67,7 +68,6 @@ def AlmacenList(request):
         'queryset':queryset,
         'form':form,
         'count': count
-
     }
     if request.user.is_authenticated():
         return HttpResponse(template.render(context, request))
