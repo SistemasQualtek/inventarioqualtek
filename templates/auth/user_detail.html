@@ -28,7 +28,7 @@
 				<div class="col-lg-8">
 					<hr>
 					<h1>Información Personal</h1>
-					<p>Nombre de Usuario: {{ object.username }}</p>
+					<p>Nombre de Usuario: {{ object.username }}</p> 
 					<p style="color:{%if  object.first_name %}{%else%}red{%endif%};">Nombre: {%if  object.first_name %}{{ object.first_name }}{% else %}Sin nombre Asignado{%endif%}</p>
 					<p style="color:{%if  object.last_name %}{%else%}red{%endif%};">Apellidos: {%if  object.last_name %}{{ object.last_name }}{% else %}Sin Apellidos Asignados{%endif%}</p>
 					<p>Correo Electrónico: {{ object.email }}</p>

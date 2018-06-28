@@ -8,13 +8,14 @@ from django.template import loader
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Sum
 from .models import Almacen
-from .forms import AlmacenForm
+from .forms import AlmacenForm, EntradaForm, SalidaForm
 import pprint
 from django.views.generic.edit import (
     CreateView,
     UpdateView,
     DeleteView
 )
+
 ############################################Views Almacen########################
 class AlmacenList(ListView):
     model = Almacen
@@ -50,7 +51,7 @@ def AgregaraStock(request):
     if request.user.is_authenticated():
         return HttpResponse(template.render(context, request))
     else:
-        return HttpResponseRedirect('/AlmacenList/')
+        return HttpResponseRedirect('/login/')
 
 def AlmacenList(request):
     count = Almacen.objects.count()
@@ -74,13 +75,47 @@ def AlmacenList(request):
     else:
         return render(request, "almacen/almacen_list.html",context)
 
-def AlmacenDetail(request,pk):
+def EntradaDetail(request,pk):
     almacen = get_object_or_404(Almacen, pk=pk)
-    template = loader.get_template('almacen/almacen_detail.html')
+    template = loader.get_template('almacen/input.html')
+    forme = EntradaForm(request.POST, request.FILES)
+    if forme.is_valid():
+        existencia = forme.cleaned_data['existencia']
+        # almacen.existencia = almacen.existencia + existencia
+        almacen.save()
     context = {
-        'almacen': almacen
-        }
+    'forme': forme,
+    'almacen': almacen
+    }
     if request.user.is_authenticated():
         return HttpResponse(template.render(context, request))
     else:
-        return HttpResponseRedirect('/AlmacenList/')
+        return HttpResponseRedirect(reverse('almacen/input.html', context))
+
+def SalidaDetail(request,pk):
+    almacen = get_object_or_404(Almacen, pk=pk)
+    template = loader.get_template('almacen/output.html')
+    forms = SalidaForm(request.POST, request.FILES)
+    if forms.is_valid():
+        existencia = forms.cleaned_data['existencia']
+        # almacen.existencia = almacen.existencia - existencia
+        almacen.save()
+    context = {
+    'forms': forms,
+    'almacen': almacen
+    }
+    if request.user.is_authenticated():
+        return HttpResponse(template.render(context, request))
+    else:
+        return HttpResponseRedirect(reverse('almacen/output.html', context))
+
+# def AlmacenDetail(request,pk):
+#     almacen = get_object_or_404(Almacen, pk=pk)
+#     template = loader.get_template('almacen/almacen_detail.html')
+#     context = {
+#         'almacen': almacen
+#         }
+#     if request.user.is_authenticated():
+#         return HttpResponse(template.render(context, request))
+#     else:
+#         return HttpResponseRedirect('/login/')

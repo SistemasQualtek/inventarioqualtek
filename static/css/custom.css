@@ -160,3 +160,21 @@ div.cs-skin-slide {
 .close{
   color: #f72828!important;
 }
+.tbody{
+  width: 100%;
+  height: 800px;
+  overflow: scroll;
+  -webkit-overflow: scroll;
+  -mozkit-overflow: scroll;
+}
+.header-fixed{
+  background-color: #f0f0f0;
+  position: relative;
+}
+.table{
+  height: 600px;
+}
+.btn-success{
+  border-color: #20d13c!important;
+  background-color: #20d13c!important; 
+}

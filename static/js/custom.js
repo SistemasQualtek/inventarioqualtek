@@ -108,3 +108,8 @@ $(document).ready(function () {
   var elemen = document.getElementsByClassName("checkbox")[0];
   elemen.classList.remove("checkbox");
 });
+
+ $('#id_cantidad_vendida').bind('input', function() {
+   qty = $(this).val() // get the current value of the input field.
+   document.getElementById("total1").value = ({{producto.precio}}*qty);
+ });

@@ -60,7 +60,7 @@ def cliente(request):
     if request.user.is_authenticated():
         return HttpResponse(template.render(context, request))
     else:
-        return HttpResponseRedirect('/ClienteList/')
+        return HttpResponseRedirect('/login/')
 
 def ClienteList(request):
     queryset = Cliente.objects.all().order_by('id')

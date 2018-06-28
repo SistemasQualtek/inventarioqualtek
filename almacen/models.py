@@ -37,7 +37,7 @@ class Almacen(models.Model):
     descripcion = models.CharField(max_length=200,blank=True,null=True)
     medida = models.CharField(max_length=50,blank=True,null=True)
     unidad = models.CharField(max_length=50,blank=True,null=True)
-    existencia = models.PositiveIntegerField(blank=True, null=True)
+    existencia = models.IntegerField(blank=True, null=True)
     cantidad_caja = models.PositiveIntegerField(blank=True, null=True)
     cantidad_rb = models.PositiveIntegerField(blank=True, null=True)
     proveedor = models.CharField(max_length=50,blank=True,null=True)
@@ -45,3 +45,9 @@ class Almacen(models.Model):
     costo = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=6)
     def __str__(self):
         return self.codigo
+
+class log(models.Model):
+    accion = models.CharField(max_length=50,blank=True,null=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.accion

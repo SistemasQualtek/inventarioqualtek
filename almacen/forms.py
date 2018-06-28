@@ -86,3 +86,39 @@ class AlmacenForm(forms.ModelForm):
                                                 }),
 
                     }
+
+class EntradaForm(forms.ModelForm):
+    class Meta:
+        model = Almacen
+        fields = [
+			'existencia'
+		]
+        labels = {
+            'existencia': 'Entrada',
+            }
+        widgets = {
+            'existencia': NumberInput(attrs={
+                                            'class':'form-control',
+                                            'id': 'existencia',
+                                            'name': 'existencia',
+                                            'placeholder':'0'
+                                            })
+        }
+
+class SalidaForm(forms.ModelForm):
+    class Meta:
+        model = Almacen
+        fields = [
+			'existencia'
+		]
+        labels = {
+            'existencia': 'Salida',
+            }
+        widgets = {
+            'existencia': NumberInput(attrs={
+                                            'class':'form-control',
+                                            'id': 'existencia',
+                                            'name': 'existencia',
+                                            'placeholder':'0'
+                                            })
+        }
